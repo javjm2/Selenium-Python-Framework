@@ -4,7 +4,7 @@ from tests.base import BaseClass
 
 
 class TestLogin(BaseClass):
-    def test_login(self):
+    def test_purchases(self):
         login_page = LoginPage(self.driver)
         home_page = login_page.enter_credentials()
         super().verify_login()

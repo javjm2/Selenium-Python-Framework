@@ -21,6 +21,7 @@ def driver_init(request):
         driver = webdriver.Firefox(executable_path='C:/geckodriver.exe')
     driver.get("https://www.saucedemo.com")
     request.instance.driver = driver
+    request.instance.browser_name = browser_name
     yield
     driver.close()
     driver.quit()
@@ -51,12 +52,3 @@ def pytest_runtest_makereport(item):
 
 def _capture_screenshot(name):
     driver.get_screenshot_as_file(name)
-
-
-@pytest.fixture()
-def setup(request):
-    driver = webdriver.Chrome(executable_path='C:/chromedriver.exe')
-    driver.get("https://www.saucedemo.com")
-    request.cls.driver = driver
-    yield
-    driver.quit()

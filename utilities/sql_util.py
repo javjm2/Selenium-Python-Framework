@@ -9,4 +9,5 @@ class SQLUtil:
 
         cursor.execute(f"SELECT {column} FROM {table}")
         values = cursor.fetchall()
+        values = [j for i in values for j in i]
         return values

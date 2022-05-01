@@ -12,10 +12,11 @@ class HomePage:
 
     def add_item_to_basket(self):
         el = SQLUtil.read_data(self, "name", "shopping_items")
-        item = el[0][0].lower().split(' ')
+        first_item = el[0]
+        item = first_item.lower().split(' ')
         new_item = '-'.join(item)
         self.driver.find_element_by_id(f'add-to-cart-{new_item}').click()
-        return el[0][0]
+        return first_item
 
     def open_basket(self):
         self.driver.find_element_by_id('shopping_cart_container').click()
@@ -28,7 +29,6 @@ class HomePage:
             self.driver.find_element_by_xpath('//*[contains(text(), "Price (low to high)")]').click()
         elif sort_type == 'high-low':
             self.driver.find_element_by_xpath('//*[contains(text(), "Price (high to low)")]').click()
-        return self
         return self
 
     def sort_items_by_name(self, sort_type):
@@ -54,7 +54,7 @@ class HomePage:
                     return True
                 else:
                     continue
-                return False
+            return False
 
     def compare_item_price(self, price1, price2):
         return price1 != price2
