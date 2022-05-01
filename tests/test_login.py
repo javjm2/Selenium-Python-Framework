@@ -1,14 +1,13 @@
-import time
 import unittest
 from page_objects.login_page import LoginPage
-from utilities.base_class import BaseClass
+from tests.base import BaseClass
 
 
 class TestLogin(BaseClass):
-    def test_something(self):
+    def test_login(self):
         login_page = LoginPage(self.driver)
         home_page = login_page.enter_credentials()
-        self.verify_login()
+        super().verify_login()
         added_item = home_page.add_item_to_basket()
         basket_page = home_page.open_basket()
         assert basket_page.assert_item_in_basket(added_item)
@@ -19,7 +18,7 @@ class TestLogin(BaseClass):
     def test_product_sorting_by_name(self):
         login_page = LoginPage(self.driver)
         home_page = login_page.enter_credentials()
-        self.verify_login()
+        super().verify_login()
         item1 = home_page.first_item_name()
         home_page.sort_items_by_name('z-a')
         item2 = home_page.first_item_name()
@@ -28,7 +27,7 @@ class TestLogin(BaseClass):
     def test_product_sort_by_price(self):
         login_page = LoginPage(self.driver)
         home_page = login_page.enter_credentials()
-        self.verify_login()
+        super().verify_login()
         price1 = home_page.first_item_price()
         home_page.sort_items_by_price('low-high')
         price2 = home_page.first_item_price()
