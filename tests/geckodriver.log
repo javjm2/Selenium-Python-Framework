@@ -1100,3 +1100,22 @@ JavaScript error: resource:///modules/Interactions.jsm, line 209: NS_ERROR_FAILU
 
 ###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
 
+1646849995788	geckodriver	INFO	Listening on 127.0.0.1:24579
+1646849998866	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "24580" "-no-remote" "-profile" "C:\\Users\\javjm\\AppData\\Local\\Temp\\rust_mozprofileqfQUQe"
+1646850000097	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\javjm\\AppData\\Local\\Temp\\rust_mozprofileqfQUQe\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:24580/devtools/browser/39264632-fac5-4b98-ba3a-1f1302972fa4
+1646850003272	Marionette	INFO	Listening on port 24585
+1646850003731	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1646850006292	Marionette	INFO	Stopped listening on port 24585
+JavaScript error: resource:///modules/Interactions.jsm, line 209: NS_ERROR_FAILURE: Component returned failure code: 0x80004005 (NS_ERROR_FAILURE) [nsIUserIdleService.removeIdleObserver]
+!!! error running onStopped callback: TypeError: callback is not a function
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1646850006820	RemoteAgent	ERROR	unable to stop listener: [Exception... "Component returned failure code: 0x8000ffff (NS_ERROR_UNEXPECTED) [nsIWindowMediator.getEnumerator]"  nsresult: "0x8000ffff (NS_ERROR_UNEXPECTED)"  location: "JS frame :: chrome://remote/content/cdp/observers/TargetObserver.jsm :: stop :: line 64"  data: no] Stack trace: stop()@TargetObserver.jsm:64
+unwatchForTabs()@TargetList.jsm:70
+unwatchForTargets()@TargetList.jsm:37
+destructor()@TargetList.jsm:109
+stop()@CDP.jsm:104
+close()@RemoteAgent.jsm:138

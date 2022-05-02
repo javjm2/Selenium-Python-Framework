@@ -2,6 +2,9 @@ import pytest
 from selenium import webdriver
 from selenium.webdriver.support.wait import WebDriverWait
 
+from page_objects.login_page import LoginPage
+from utilities.helpers import Helpers
+
 driver = None
 
 
@@ -22,6 +25,8 @@ def driver_init(request):
     driver.get("https://www.saucedemo.com")
     request.instance.driver = driver
     request.instance.browser_name = browser_name
+    helpers = Helpers(driver)
+    request.instance.helpers = helpers
     yield
     driver.close()
     driver.quit()

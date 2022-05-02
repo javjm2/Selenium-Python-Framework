@@ -7,7 +7,8 @@ from page_objects.basket_page import BasketPage
 
 
 class HomePage:
-    def __init__(self, driver):
+    def __init__(self, driver, helpers):
+        self.helpers = helpers
         self.driver = driver
 
     def add_item_to_basket(self):
@@ -15,35 +16,35 @@ class HomePage:
         first_item = el[0]
         item = first_item.lower().split(' ')
         new_item = '-'.join(item)
-        self.driver.find_element_by_id(f'add-to-cart-{new_item}').click()
+        self.helpers.locate_elements('id', f'add-to-cart-{new_item}').click()
         return first_item
 
     def open_basket(self):
-        self.driver.find_element_by_id('shopping_cart_container').click()
-        basket_page = BasketPage(self.driver)
+        self.helpers.locate_elements('id', 'shopping_cart_container').click()
+        basket_page = BasketPage(self.driver, self.helpers)
         return basket_page
 
     def sort_items_by_price(self, sort_type):
-        self.driver.find_element_by_class_name('product_sort_container').click()
+        self.helpers.locate_elements('class_name', 'product_sort_container').click()
         if sort_type == 'low-high':
-            self.driver.find_element_by_xpath('//*[contains(text(), "Price (low to high)")]').click()
+            self.helpers.locate_elements('xpath', '//*[contains(text(), "Price (low to high)")]').click()
         elif sort_type == 'high-low':
-            self.driver.find_element_by_xpath('//*[contains(text(), "Price (high to low)")]').click()
+            self.helpers.locate_elements('xpath', '//*[contains(text(), "Price (high to low)")]').click()
         return self
 
     def sort_items_by_name(self, sort_type):
-        self.driver.find_element_by_class_name('product_sort_container').click()
+        self.helpers.locate_elements('class_name', 'product_sort_container').click()
         if sort_type == 'a-z':
-            self.driver.find_element_by_xpath('//*[contains(text(), "Name (A to Z)")]').click()
+            self.helpers.locate_elements('xpath', '//*[contains(text(), "Name (A to Z)")]').click()
         elif sort_type == 'z-a':
-            self.driver.find_element_by_xpath('//*[contains(text(), "Name (Z to A)")]').click()
+            self.helpers.locate_elements('xpath', '//*[contains(text(), "Name (Z to A)")]').click()
         return self
 
     def first_item_name(self):
-        return self.driver.find_element_by_class_name('inventory_item_name').text
+        return self.helpers.locate_elements('class_name', 'inventory_item_name').text
 
     def first_item_price(self):
-        price = self.driver.find_element_by_class_name('inventory_item_price').text
+        price = self.helpers.locate_elements('class_name', 'inventory_item_price').text
         return float(price[1:])
 
     def compare_item_name(self, item1, item2):

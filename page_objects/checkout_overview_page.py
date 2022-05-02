@@ -1,8 +1,9 @@
 class CheckoutOverviewPage:
 
-    def __init__(self, driver):
+    def __init__(self, driver, helpers):
+        self.helpers = helpers
         self.driver = driver
 
     def click_finish(self):
-        self.driver.find_element_by_id('finish').click()
+        self.helpers.locate_elements('id', 'finish').click()
         return self
