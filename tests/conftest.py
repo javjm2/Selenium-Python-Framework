@@ -1,8 +1,5 @@
 import pytest
 from selenium import webdriver
-from selenium.webdriver.support.wait import WebDriverWait
-
-from page_objects.login_page import LoginPage
 from utilities.helpers import Helpers
 
 driver = None

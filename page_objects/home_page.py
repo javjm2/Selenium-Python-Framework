@@ -1,8 +1,4 @@
 import string
-from telnetlib import EC
-from utilities.sql_util import SQLUtil
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
 from page_objects.basket_page import BasketPage
 
 
@@ -12,7 +8,7 @@ class HomePage:
         self.driver = driver
 
     def add_item_to_basket(self):
-        el = SQLUtil.read_data(self, "name", "shopping_items")
+        el = self.helpers.read_database_values("name", "shopping_items")
         first_item = el[0]
         item = first_item.lower().split(' ')
         new_item = '-'.join(item)
