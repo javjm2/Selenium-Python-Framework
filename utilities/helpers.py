@@ -10,14 +10,15 @@ class Helpers:
 
     def wait_for_element_to_be_visible(self, element, value, duration):
 
-        element = '_'.join(x for x in element.split()).upper()
-        # TODO: use element param instead of statically adding by attr
-        for attribute in dir(By):
-            if element == attribute:
-                import pdb;
-                pdb.set_trace()
-                wait = WebDriverWait(self.driver, duration).until(
-                    EC.visibility_of_element_located((By.CLASS_NAME, value)))
+        if element == 'id':
+            wait = WebDriverWait(self.driver, duration).until(
+                EC.visibility_of_element_located((By.ID, value)))
+        elif element == 'class_name':
+            wait = WebDriverWait(self.driver, duration).until(
+                EC.visibility_of_element_located((By.CLASS_NAME, value)))
+        elif element == 'xpath':
+            wait = WebDriverWait(self.driver, duration).until(
+                EC.visibility_of_element_located((By.XPATH, value)))
 
     def locate_elements(self, element, name):
         if element == 'id':
