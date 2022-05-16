@@ -12,7 +12,7 @@ class TestLogin(BaseClass):
         assert basket_page.assert_item_in_basket(added_item)
         checkout_info_page = basket_page.click_checkout()
         checkout_overview_page = checkout_info_page.enter_details().click_continue()
-        checkout_overview_page.click_finish('test')
+        checkout_overview_page.click_finish()
 
     def test_product_sorting_by_name(self):
         login_page = LoginPage(self.driver, self.helpers)
