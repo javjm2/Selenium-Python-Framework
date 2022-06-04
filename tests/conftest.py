@@ -1,6 +1,10 @@
+import pdb
+
 import pytest
 from selenium import webdriver
 from utilities.helpers import Helpers
+from selenium.webdriver.chrome.options import Options as ChromeOptions
+from selenium.webdriver.firefox.options import Options as FirefoxOptions
 
 driver = None
 
@@ -14,11 +18,18 @@ def pytest_addoption(parser):
 @pytest.fixture()
 def driver_init(request):
     global driver
+    firefox_options = FirefoxOptions()
+    firefox_options.add_argument('--headless')
+    chrome_options = ChromeOptions()
+    chrome_options.add_argument('--headless')
     browser_name = request.config.getoption('--browser_name')
+
     if browser_name == 'chrome':
-        driver = webdriver.Chrome(executable_path='C:/chromedriver.exe')
+        driver = webdriver.Chrome(executable_path='C:/chromedriver.exe', chrome_options=chrome_options)
     elif browser_name == 'firefox':
-        driver = webdriver.Firefox(executable_path='C:/geckodriver.exe')
+        driver = webdriver.Firefox(executable_path='C:/geckodriver.exe', firefox_options=firefox_options)
+    else:
+        driver = webdriver.Chrome(executable_path='C:/chromedriver.exe', chrome_options=chrome_options)
     driver.get("https://www.saucedemo.com")
     request.instance.driver = driver
     request.instance.browser_name = browser_name
