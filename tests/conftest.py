@@ -5,9 +5,10 @@ from selenium import webdriver
 from utilities.helpers import Helpers
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
+from page_objects.home_page import HomePage
 
 driver = None
-
+helpers = None
 
 def pytest_addoption(parser):
     parser.addoption(
@@ -18,6 +19,7 @@ def pytest_addoption(parser):
 @pytest.fixture()
 def driver_init(request):
     global driver
+    global helpers
     firefox_options = FirefoxOptions()
     firefox_options.add_argument('--headless')
     chrome_options = ChromeOptions()
@@ -30,14 +32,24 @@ def driver_init(request):
         driver = webdriver.Firefox(executable_path='C:/geckodriver.exe', firefox_options=firefox_options)
     else:
         driver = webdriver.Chrome(executable_path='C:/chromedriver.exe', chrome_options=chrome_options)
+
     driver.get("https://www.saucedemo.com")
     request.instance.driver = driver
     request.instance.browser_name = browser_name
     helpers = Helpers(driver)
     request.instance.helpers = helpers
+
     yield
     driver.close()
     driver.quit()
+
+@pytest.fixture()
+def login_as_valid_user(driver_init):
+    helpers.locate_elements('id', 'user-name').send_keys('standard_user')
+    helpers.locate_elements('id', 'password').send_keys('secret_sauce')
+    helpers.locate_elements('id', 'login-button').click()
+    helpers.wait_for_element_to_be_visible('class_name', 'app_logo', 5)
+    return HomePage(driver, helpers)
 
 
 @pytest.mark.hookwrapper
