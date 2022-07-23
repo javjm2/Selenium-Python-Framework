@@ -12,35 +12,35 @@ class HomePage:
         first_item = el[0]
         item = first_item.lower().split(' ')
         new_item = '-'.join(item)
-        self.helpers.locate_elements('id', f'add-to-cart-{new_item}').click()
+        self.helpers.locate_element('id', f'add-to-cart-{new_item}').click()
         return first_item
 
     def open_basket(self):
-        self.helpers.locate_elements('id', 'shopping_cart_container').click()
+        self.helpers.locate_element('id', 'shopping_cart_container').click()
         basket_page = BasketPage(self.driver, self.helpers)
         return basket_page
 
     def sort_items_by_price(self, sort_type):
-        self.helpers.locate_elements('class_name', 'product_sort_container').click()
+        self.helpers.locate_element('class_name', 'product_sort_container').click()
         if sort_type == 'low-high':
-            self.helpers.locate_elements('xpath', '//*[contains(text(), "Price (low to high)")]').click()
+            self.helpers.locate_element('xpath', '//*[contains(text(), "Price (low to high)")]').click()
         elif sort_type == 'high-low':
-            self.helpers.locate_elements('xpath', '//*[contains(text(), "Price (high to low)")]').click()
+            self.helpers.locate_element('xpath', '//*[contains(text(), "Price (high to low)")]').click()
         return self
 
     def sort_items_by_name(self, sort_type):
-        self.helpers.locate_elements('class_name', 'product_sort_container').click()
+        self.helpers.locate_element('class_name', 'product_sort_container').click()
         if sort_type == 'a-z':
-            self.helpers.locate_elements('xpath', '//*[contains(text(), "Name (A to Z)")]').click()
+            self.helpers.locate_element('xpath', '//*[contains(text(), "Name (A to Z)")]').click()
         elif sort_type == 'z-a':
-            self.helpers.locate_elements('xpath', '//*[contains(text(), "Name (Z to A)")]').click()
+            self.helpers.locate_element('xpath', '//*[contains(text(), "Name (Z to A)")]').click()
         return self
 
     def first_item_name(self):
-        return self.helpers.locate_elements('class_name', 'inventory_item_name').text
+        return self.helpers.locate_element('class_name', 'inventory_item_name').text
 
     def first_item_price(self):
-        price = self.helpers.locate_elements('class_name', 'inventory_item_price').text
+        price = self.helpers.locate_element('class_name', 'inventory_item_price').text
         return float(price[1:])
 
     def compare_item_name(self, item1, item2):

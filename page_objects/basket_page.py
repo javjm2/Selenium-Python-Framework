@@ -7,14 +7,14 @@ class BasketPage:
         self.driver = driver
 
     def click_checkout(self):
-        self.helpers.locate_elements('id', 'checkout').click()
+        self.helpers.locate_element('id', 'checkout').click()
         checkout_info_page = CheckoutInfoPage(self.driver, self.helpers)
         return checkout_info_page
 
     def assert_item_in_basket(self, item):
-        basket_item = self.helpers.locate_elements('class_name', 'inventory_item_name').text
+        basket_item = self.helpers.locate_element('class_name', 'inventory_item_name').text
         return basket_item == item
 
     def click_remove_product_button(self):
-        self.helpers.locate_elements('id', 'remove-sauce-labs-backpack').click()
+        self.helpers.locate_element('id', 'remove-sauce-labs-backpack').click()
         return self

@@ -5,5 +5,5 @@ class CheckoutOverviewPage:
         self.driver = driver
 
     def click_finish(self):
-        self.helpers.locate_elements('id', 'finish').click()
+        self.helpers.locate_element('id', 'finish').click()
         return self

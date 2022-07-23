@@ -10,6 +10,7 @@ class TestLogin(BaseClass):
         checkout_info_page = basket_page.click_checkout()
         checkout_overview_page = checkout_info_page.enter_details().click_continue()
         checkout_overview_page.click_finish()
+        self.helpers.wait_for_element_to_be_visible()
 
     def test_product_sorting_by_name(self, login_as_valid_user):
         home_page = login_as_valid_user.enter_credentials()

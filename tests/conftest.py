@@ -10,6 +10,7 @@ from page_objects.home_page import HomePage
 driver = None
 helpers = None
 
+
 def pytest_addoption(parser):
     parser.addoption(
         "--browser_name", action="store", default="chrome"
@@ -43,11 +44,12 @@ def driver_init(request):
     driver.close()
     driver.quit()
 
+
 @pytest.fixture()
 def login_as_valid_user(driver_init):
-    helpers.locate_elements('id', 'user-name').send_keys('standard_user')
-    helpers.locate_elements('id', 'password').send_keys('secret_sauce')
-    helpers.locate_elements('id', 'login-button').click()
+    helpers.locate_element('id', 'user-name').send_keys('standard_user')
+    helpers.locate_element('id', 'password').send_keys('secret_sauce')
+    helpers.locate_element('id', 'login-button').click()
     helpers.wait_for_element_to_be_visible('class_name', 'app_logo', 5)
     return HomePage(driver, helpers)
 

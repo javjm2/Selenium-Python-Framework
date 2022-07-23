@@ -8,11 +8,11 @@ class CheckoutInfoPage:
 
     def enter_details(self):
         self.driver.find_element_by_name('firstName').send_keys('test_first_name')
-        self.helpers.locate_elements('id', 'last-name').send_keys('test_last_name')
-        self.helpers.locate_elements('id', 'postal-code').send_keys('nw10 8ef')
+        self.helpers.locate_element('id', 'last-name').send_keys('test_last_name')
+        self.helpers.locate_element('id', 'postal-code').send_keys('nw10 8ef')
         return self
 
     def click_continue(self):
-        self.helpers.locate_elements('id', 'continue').click()
+        self.helpers.locate_element('id', 'continue').click()
         checkout_overview_page = CheckoutOverviewPage(self.driver, self.helpers)
         return checkout_overview_page
