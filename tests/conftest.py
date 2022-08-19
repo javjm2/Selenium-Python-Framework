@@ -7,9 +7,6 @@ from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
 from page_objects.home_page import HomePage
 
-driver = None
-helpers = None
-
 
 def pytest_addoption(parser):
     parser.addoption(
