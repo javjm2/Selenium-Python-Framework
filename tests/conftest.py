@@ -30,8 +30,6 @@ def driver_init(request):
         driver = webdriver.Chrome(ChromeDriverManager().install(), chrome_options=chrome_options)
     elif browser_name == 'firefox':
         driver = webdriver.Firefox(GeckoDriverManager().install(), firefox_options=firefox_options)
-    else:
-        driver = webdriver.Chrome(ChromeDriverManager().install(), chrome_options=chrome_options)
 
     driver.get("https://www.saucedemo.com")
     request.instance.driver = driver
