@@ -6,6 +6,8 @@ from utilities.helpers import Helpers
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
 from page_objects.home_page import HomePage
+from webdriver_manager.chrome import ChromeDriverManager
+from webdriver_manager.firefox import GeckoDriverManager
 
 
 def pytest_addoption(parser):
@@ -25,11 +27,11 @@ def driver_init(request):
     browser_name = request.config.getoption('--browser_name')
 
     if browser_name == 'chrome':
-        driver = webdriver.Chrome(executable_path='C:/chromedriver.exe', chrome_options=chrome_options)
+        driver = webdriver.Chrome(ChromeDriverManager().install(), chrome_options=chrome_options)
     elif browser_name == 'firefox':
-        driver = webdriver.Firefox(executable_path='C:/geckodriver.exe', firefox_options=firefox_options)
+        driver = webdriver.Firefox(GeckoDriverManager().install(), firefox_options=firefox_options)
     else:
-        driver = webdriver.Chrome(executable_path='C:/chromedriver.exe', chrome_options=chrome_options)
+        driver = webdriver.Chrome(ChromeDriverManager().install(), chrome_options=chrome_options)
 
     driver.get("https://www.saucedemo.com")
     request.instance.driver = driver
@@ -75,4 +77,4 @@ def pytest_runtest_makereport(item):
 
 
 def _capture_screenshot(name):
-    driver.get_screenshot_as_file(name)
+    pass
