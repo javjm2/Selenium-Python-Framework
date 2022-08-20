@@ -1,7 +1,9 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import sqlite3
+import pyodbc
+from dotenv import load_dotenv
+import os
 
 
 class Helpers:
@@ -37,10 +39,13 @@ class Helpers:
             return self.driver.find_elements_by_xpath(name)
 
     def read_database_values(self, column, table):
-        with sqlite3.connect("C:/python appium/user_info.db") as db:
-            cursor = db.cursor()
-
-        cursor.execute(f"SELECT {column} FROM {table}")
+        db = pyodbc.connect('Driver={SQL Server Native Client 11.0};'
+                            f'Server={os.environ.get("SERVER_NAME")};'
+                            f'Database={os.environ.get("DATABASE_NAME")};'
+                            f'Trusted_Connection={os.environ.get("CONNECTION")};')
+        cursor = db.cursor()
+        cursor.execute(f'SELECT {column} FROM {table}')
         values = cursor.fetchall()
         values = [j for i in values for j in i]
         return values
+
