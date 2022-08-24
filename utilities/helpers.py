@@ -10,16 +10,18 @@ class Helpers:
     def __init__(self, driver):
         self.driver = driver
 
-    def wait_for_element_to_be_visible(self, element, value, duration):
+    def wait_for(self, value, duration):
+        WebDriverWait(self.driver, value, duration).until(value)
 
+    def wait_for_element_to_be_visible(self, element, value, duration):
         if element == 'id':
-            wait = WebDriverWait(self.driver, duration).until(
+            WebDriverWait(self.driver, duration).until(
                 EC.visibility_of_element_located((By.ID, value)))
         elif element == 'class_name':
-            wait = WebDriverWait(self.driver, duration).until(
+            WebDriverWait(self.driver, duration).until(
                 EC.visibility_of_element_located((By.CLASS_NAME, value)))
         elif element == 'xpath':
-            wait = WebDriverWait(self.driver, duration).until(
+            WebDriverWait(self.driver, duration).until(
                 EC.visibility_of_element_located((By.XPATH, value)))
 
     def locate_element(self, element, name):
