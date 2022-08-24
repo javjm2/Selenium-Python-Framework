@@ -11,7 +11,7 @@ class Helpers:
         self.driver = driver
 
     def wait_for(self, value, duration):
-        WebDriverWait(self.driver, value, duration).until(value)
+        WebDriverWait(self.driver, duration).until(lambda _: value)
 
     def wait_for_element_to_be_visible(self, element, value, duration):
         if element == 'id':
