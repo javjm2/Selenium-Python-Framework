@@ -6,11 +6,11 @@ from tests.base import BaseClass
 
 
 class TestLogin(BaseClass):
-    @pytest.mark.skip()
+    # @pytest.mark.skip()
     def test_purchases(self, login_as_valid_user):
         added_item = login_as_valid_user.add_item_to_basket()
         basket_page = login_as_valid_user.open_basket()
-        assert basket_page.assert_item_in_basket(added_item)
+        assert basket_page.assert_item_in_basket(basket_page)
         checkout_info_page = basket_page.click_checkout()
         checkout_overview_page = checkout_info_page.enter_details().click_continue()
         checkout_overview_page.click_finish()
