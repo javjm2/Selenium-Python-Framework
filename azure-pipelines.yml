@@ -35,6 +35,9 @@ steps:
     pytest
   displayName: 'pytest'
 
+- script: pip install -r requirements.txt
+  displayName: 'Install requirements'
+  
 - task: UsePythonVersion@0
   inputs:
     versionSpec: '3.7'
