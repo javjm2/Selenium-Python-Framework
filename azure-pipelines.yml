@@ -1,13 +1,11 @@
 # Python package
-- task: CmdLine@2
-  inputs:
-    script: 'pytest'
 # Create and test a Python package on multiple Python versions.
 # Add steps that analyze code, save the dist with the build record, publish to a PyPI-compatible index, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/python
 
 trigger:
 - main
+
 pool:
   vmImage: ubuntu-latest
 strategy:
@@ -36,3 +34,13 @@ steps:
     pip install pytest pytest-azurepipelines
     pytest
   displayName: 'pytest'
+
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '3.7'
+    addToPath: true
+    architecture: 'x64'
+
+- task: CmdLine@2
+  inputs:
+    script: 'python -m pytest'
