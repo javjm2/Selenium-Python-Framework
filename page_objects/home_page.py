@@ -44,7 +44,7 @@ class HomePage:
         return float(price[1:])
 
     @staticmethod
-    def compare_item_name(self, item1, item2):
+    def compare_item_name(item1, item2):
         alphabet = string.ascii_lowercase
         for letter in alphabet:
             for j, k in zip(item1, item2):
@@ -55,5 +55,5 @@ class HomePage:
             return False
 
     @staticmethod
-    def compare_item_price(self, price1, price2):
+    def compare_item_price(price1, price2):
         return price1 != price2
