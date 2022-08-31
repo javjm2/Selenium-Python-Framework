@@ -43,6 +43,7 @@ class HomePage:
         price = self.helpers.locate_element('class_name', 'inventory_item_price').text
         return float(price[1:])
 
+    @staticmethod
     def compare_item_name(self, item1, item2):
         alphabet = string.ascii_lowercase
         for letter in alphabet:
@@ -53,5 +54,6 @@ class HomePage:
                     continue
             return False
 
+    @staticmethod
     def compare_item_price(self, price1, price2):
         return price1 != price2

@@ -7,6 +7,5 @@ from utilities.helpers import Helpers
 
 @pytest.mark.usefixtures('driver_init')
 class BaseClass:
-    def verify_login(self):
-        self.helpers.locate_element('class_name', 'app_logo')
-        wait = WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((By.CLASS_NAME, 'app_logo')))
+    def wait_for(self, value, duration):
+        WebDriverWait(self.driver, duration).until(lambda _: value)
