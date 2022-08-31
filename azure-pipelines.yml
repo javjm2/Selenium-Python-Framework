@@ -40,6 +40,10 @@ steps:
 
 - task: CmdLine@2
   inputs:
+    script: 'pwd'
+
+- task: CmdLine@2
+  inputs:
     script: 'python -m pytest --html=tests/report.html'
 
 - task: PublishHtmlReport@1
