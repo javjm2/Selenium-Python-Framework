@@ -44,4 +44,4 @@ steps:
 
 - task: PublishHtmlReport@1
   inputs:
-    reportDir: '$(ResultsPath)/report.html'
+    reportDir: 'report.html'
