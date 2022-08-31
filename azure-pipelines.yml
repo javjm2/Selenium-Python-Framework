@@ -40,4 +40,4 @@ steps:
 
 - task: CmdLine@2
   inputs:
-    script: 'python -m pytest'
+    script: 'python -m pytest --html=tests/report.html'
