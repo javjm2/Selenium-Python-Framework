@@ -6,45 +6,94 @@
 trigger:
 - main
 
-pool:
-  vmImage: ubuntu-latest
-strategy:
-  matrix:
-    Python37:
-      python.version: '3.7'
+jobs:
+  - job:
+    pool:
+      vmImage: ubuntu-latest
+    strategy:
+      matrix:
+        Python37:
+          python.version: '3.7'
 
-steps:
-- task: UsePythonVersion@0
-  inputs:
-    versionSpec: '$(python.version)'
-  displayName: 'Use Python $(python.version)'
+    steps:
+    - task: UsePythonVersion@0
+      inputs:
+        versionSpec: '$(python.version)'
+      displayName: 'Use Python $(python.version)'
 
-- script: |
-    python -m pip install --upgrade pip
-    pip install -r requirements.txt
-  displayName: 'Install dependencies'
+    - script: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+      displayName: 'Install dependencies'
 
-- script: |
-    pip install pytest pytest-azurepipelines
-    pip install pytest-xdist
-    pytest --html=tests/report.html
-  displayName: 'pytest'
+    - script: |
+        pip install pytest pytest-azurepipelines
+        pip install pytest-xdist
+        pytest --html=tests/report.html
+      displayName: 'pytest'
 
-- script: pip install -r requirements.txt
-  displayName: 'Install requirements'
-  
-- task: UsePythonVersion@0
-  inputs:
-    versionSpec: '3.7'
-    addToPath: true
-    architecture: 'x64'
+    - script: pip install -r requirements.txt
+      displayName: 'Install requirements'
+      
+    - task: UsePythonVersion@0
+      inputs:
+        versionSpec: '3.7'
+        addToPath: true
+        architecture: 'x64'
 
-- task: PublishPipelineArtifact@1
-  inputs:
-    targetPath: 'tests/report.html'
-    artifact: 'Test Reports'
-    publishLocation: 'pipeline'
-    
-- task: PublishHtmlReport@1
-  inputs:
-    reportDir: 'tests/report.html'
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: 'tests/report.html'
+        artifact: 'Test Reports'
+        publishLocation: 'pipeline'
+        
+    - task: PublishHtmlReport@1
+      inputs:
+        reportDir: 'tests/report.html'
+
+
+jobs:
+  - job:
+    pool:
+      vmImage: ubuntu-latest
+    strategy:
+      matrix:
+        Python37:
+          python.version: '3.7'
+
+    steps:
+    - task: UsePythonVersion@0
+      inputs:
+        versionSpec: '$(python.version)'
+      displayName: 'Use Python $(python.version)'
+
+    - script: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+      displayName: 'Install dependencies'
+
+    - script: |
+        pip install pytest pytest-azurepipelines
+        pip install pytest-xdist
+        pytest --html=tests/report.html --browser-name='edge'
+      displayName: 'pytest'
+
+    - script: pip install -r requirements.txt
+      displayName: 'Install requirements'
+      
+    - task: UsePythonVersion@0
+      inputs:
+        versionSpec: '3.7'
+        addToPath: true
+        architecture: 'x64'
+
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: 'tests/report.html'
+        artifact: 'Test Reports'
+        publishLocation: 'pipeline'
+        
+    - task: PublishHtmlReport@1
+      inputs:
+        reportDir: 'tests/report.html'
+
