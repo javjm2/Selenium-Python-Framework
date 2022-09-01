@@ -26,12 +26,8 @@ steps:
 
 - script: |
     pip install pytest pytest-azurepipelines
-    pytest
+    pytest -n 2 --html=tests/report.html
   displayName: 'pytest'
-  
-- bash: |
-   pip install pytest-xdist
-
 
 - script: pip install -r requirements.txt
   displayName: 'Install requirements'
@@ -41,11 +37,6 @@ steps:
     versionSpec: '3.7'
     addToPath: true
     architecture: 'x64'
-
-- task: CmdLine@2
-  inputs:
-    script: 'python -m pytest -n 2 --html=tests/report.html'
-
 
 - task: PublishPipelineArtifact@1
   inputs:
