@@ -7,7 +7,7 @@ trigger:
 - main
 
 jobs:
-  - job: chrome-job 
+  - job: chrome_job 
     pool:
       vmImage: ubuntu-latest
     strategy:
@@ -51,7 +51,7 @@ jobs:
       inputs:
         reportDir: 'tests/report.html'
 
-  - job: edge-job
+  - job: edge_job
     pool:
       vmImage: ubuntu-latest
     strategy:
