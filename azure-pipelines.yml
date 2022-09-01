@@ -40,7 +40,7 @@ steps:
 
 - task: CmdLine@2
   inputs:
-    script: 'python -m pytest --html=tests/report.html'
+    script: 'python -m pytest -n 2 --html=tests/report.html'
 
 
 - task: PublishPipelineArtifact@1
@@ -48,7 +48,7 @@ steps:
     targetPath: 'tests/report.html'
     artifact: 'Test Reports'
     publishLocation: 'pipeline'
-
+    
 - task: PublishHtmlReport@1
   inputs:
     reportDir: 'tests/report.html'
