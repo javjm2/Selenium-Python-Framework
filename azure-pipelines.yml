@@ -26,6 +26,7 @@ steps:
 
 - script: |
     pip install pytest pytest-azurepipelines
+    pip install pytest-xdist
     pytest -n 2 --html=tests/report.html
   displayName: 'pytest'
 
