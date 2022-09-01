@@ -4,10 +4,10 @@ import pytest
 from selenium import webdriver
 from utilities.helpers import Helpers
 from selenium.webdriver.chrome.options import Options as ChromeOptions
-from selenium.webdriver.firefox.options import Options as FirefoxOptions
+from selenium.webdriver.edge.options import Options as EdgeOptions
 from page_objects.home_page import HomePage
 from webdriver_manager.chrome import ChromeDriverManager
-from webdriver_manager.firefox import GeckoDriverManager
+from webdriver_manager.microsoft import EdgeChromiumDriverManager
 
 
 def pytest_addoption(parser):
@@ -20,16 +20,16 @@ def pytest_addoption(parser):
 def driver_init(request):
     global driver
     global helpers
-    firefox_options = FirefoxOptions()
-    firefox_options.add_argument('--headless')
+    edge_options = EdgeOptions()
+    edge_options.add_argument('--headless')
     chrome_options = ChromeOptions()
     chrome_options.add_argument('--headless')
     browser_name = request.config.getoption('--browser_name')
 
     if browser_name == 'chrome':
-        driver = webdriver.Chrome(ChromeDriverManager().install(), chrome_options=chrome_options)
-    elif browser_name == 'firefox':
-        driver = webdriver.Firefox(GeckoDriverManager().install(), firefox_options=firefox_options)
+        driver = webdriver.Chrome(ChromeDriverManager().install(), options=chrome_options)
+    elif browser_name == 'edge':
+        driver = webdriver.Edge(EdgeChromiumDriverManager().install(), options=edge_options)
 
     driver.get("https://www.saucedemo.com")
     request.instance.driver = driver
