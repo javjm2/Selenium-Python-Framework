@@ -51,8 +51,6 @@ jobs:
       inputs:
         reportDir: 'tests/report.html'
 
-
-jobs:
   - job: edge-job
     pool:
       vmImage: ubuntu-latest
