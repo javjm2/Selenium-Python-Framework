@@ -28,6 +28,10 @@ steps:
     pip install pytest pytest-azurepipelines
     pytest
   displayName: 'pytest'
+  
+- bash: |
+   pip install pytest-xdist
+
 
 - script: pip install -r requirements.txt
   displayName: 'Install requirements'
