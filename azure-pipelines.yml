@@ -7,7 +7,7 @@ trigger:
 - main
 
 jobs:
-  - job:
+  - job: chrome-job 
     pool:
       vmImage: ubuntu-latest
     strategy:
@@ -53,7 +53,7 @@ jobs:
 
 
 jobs:
-  - job:
+  - job: edge-job
     pool:
       vmImage: ubuntu-latest
     strategy:
