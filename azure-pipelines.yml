@@ -73,7 +73,7 @@ jobs:
     - script: |
         pip install pytest pytest-azurepipelines
         pip install pytest-xdist
-        pytest --html=tests/report.html --browser-name='edge'
+        pytest --html=tests/report.html --browser-name="edge"
       displayName: 'pytest'
 
     - script: pip install -r requirements.txt
