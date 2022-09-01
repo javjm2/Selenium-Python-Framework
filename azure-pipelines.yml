@@ -73,7 +73,7 @@ jobs:
     - script: |
         pip install pytest pytest-azurepipelines
         pip install pytest-xdist
-        pytest --html=tests/report.html --browser_name=edge
+        pytest -n 2 --html=tests/report.html --browser_name=edge
       displayName: 'pytest'
 
     - script: pip install -r requirements.txt
@@ -85,12 +85,6 @@ jobs:
         addToPath: true
         architecture: 'x64'
 
-    - task: PublishPipelineArtifact@1
-      inputs:
-        targetPath: 'tests/report.html'
-        artifact: 'Test Reports'
-        publishLocation: 'pipeline'
-        
     - task: PublishHtmlReport@1
       inputs:
         reportDir: 'tests/report.html'
