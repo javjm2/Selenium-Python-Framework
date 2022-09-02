@@ -1,13 +1,14 @@
+import os
 from os import environ
 from azure.identity import ClientSecretCredential
 from azure.keyvault.secrets import SecretClient
 
-TENANT_ID = "e3e02793-55b2-4bfd-a515-8488a1b0653b"
-CLIENT_ID = "b3ca5fd7-40a6-48a8-afe0-c8ab335aed41"
-CLIENT_SECRET = "wul8Q~V3jcC2gW_fHMYC~5NJHOUyLSxJ2V1JXcor"
+TENANT_ID = os.environ.get('TENANT_ID')
+CLIENT_ID = os.environ.get('CLIENT_ID')
+CLIENT_SECRET = os.environ.get('CLIENT_SECRET')
 
-KEYVAULT_NAME = "test-selenium-vault"
-KEYVAULT_URI = f"https://test-selenium-vault.vault.azure.net/"
+KEYVAULT_NAME = os.environ.get('KEYVAULT_NAME')
+KEYVAULT_URI = f"https://{KEYVAULT_NAME}.vault.azure.net/"
 
 _credentials = ClientSecretCredential(
     tenant_id=TENANT_ID,
