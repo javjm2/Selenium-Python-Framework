@@ -26,6 +26,19 @@ jobs:
         pip install -r requirements.txt
       displayName: 'Install dependencies'
 
+    - task: AzureKeyVault@2
+      inputs:
+        azureSubscription: 'Free Trial(103340b4-6070-4961-a62c-5b3009b5efe4)'
+        KeyVaultName: 'test-selenium-vault'
+        SecretsFilter: '*'
+        RunAsPreJob: false
+
+    - task: CmdLine@2
+      inputs:
+        script: |
+          'echo $(username) > config.py'
+          'echo config.py'
+
     - script: |
         pip install pytest pytest-azurepipelines
         pip install pytest-xdist
@@ -47,6 +60,7 @@ jobs:
     - task: PublishHtmlReport@1
       inputs:
         reportDir: 'tests/report.html'
+
 
   - job: edge_job
     pool:
