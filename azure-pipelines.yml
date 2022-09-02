@@ -32,9 +32,6 @@ jobs:
         pytest --html=tests/report.html
       displayName: 'pytest'
 
-    - script: pip install -r requirements.txt
-      displayName: 'Install requirements'
-      
     - task: UsePythonVersion@0
       inputs:
         versionSpec: '3.7'
@@ -75,9 +72,6 @@ jobs:
         pip install pytest-xdist
         pytest -n 2 --html=tests/report.html --browser_name=edge
       displayName: 'pytest'
-
-    - script: pip install -r requirements.txt
-      displayName: 'Install requirements'
       
     - task: UsePythonVersion@0
       inputs:
