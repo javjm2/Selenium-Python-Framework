@@ -48,6 +48,11 @@ jobs:
       inputs:
         reportDir: 'tests/report.html'
 
+    - task: PublishTestResultScreenshot@0
+      inputs:
+        organization: 'javjm'
+        screenshotFolder: 'tests/report.html'
+
   - job: edge_job
     pool:
       vmImage: ubuntu-latest
@@ -82,4 +87,10 @@ jobs:
     - task: PublishHtmlReport@1
       inputs:
         reportDir: 'tests/report.html'
+
+    - task: PublishTestResultScreenshot@0
+      inputs:
+        organization: 'javjm'
+        screenshotFolder: 'tests/report.html'
+        
 
