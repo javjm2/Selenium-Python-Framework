@@ -2,7 +2,6 @@ import pdb
 
 import pytest
 from selenium import webdriver
-
 import config
 from utilities.helpers import Helpers
 from selenium.webdriver.chrome.options import Options as ChromeOptions
@@ -46,8 +45,8 @@ def driver_init(request):
 
 @pytest.fixture()
 def login_as_valid_user(driver_init):
-    helpers.locate_element('id', 'user-name').send_keys(config.username)
-    helpers.locate_element('id', 'password').send_keys(config.password)
+    helpers.locate_element('id', 'user-name').send_keys('standard_user')
+    helpers.locate_element('id', 'password').send_keys('secret_sauce')
     helpers.locate_element('id', 'login-button').click()
     helpers.wait_for_element_to_be_visible('class_name', 'app_logo', 5)
     return HomePage(driver, helpers)
