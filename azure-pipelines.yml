@@ -30,8 +30,14 @@ jobs:
       inputs:
         script: |
           'echo config.py'
-          'cat README.md > config.py'
-          'cat config.py'
+
+    - task: CmdLine@2
+      inputs:
+        script: 'cat README.md > config.py'
+    
+    - task: CmdLine@2
+      inputs:
+        script: 'cat config.py'
 
     - script: |
         pip install pytest pytest-azurepipelines
