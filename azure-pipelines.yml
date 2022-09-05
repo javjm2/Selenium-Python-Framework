@@ -28,8 +28,7 @@ jobs:
 
     - task: CmdLine@2
       inputs:
-        script: |
-          'echo config.py'
+        script: 'echo config.py'
 
     - task: CmdLine@2
       inputs:
