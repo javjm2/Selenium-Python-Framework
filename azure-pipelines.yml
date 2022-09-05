@@ -25,10 +25,12 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
       displayName: 'Install dependencies'
-    
+
     - task: CmdLine@2
       inputs:
-        script: 'ls'
+        script: |
+          'echo $(username) > config.py'
+          'echo config.py'
 
     - script: |
         pip install pytest pytest-azurepipelines
