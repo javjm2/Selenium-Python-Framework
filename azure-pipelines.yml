@@ -29,8 +29,9 @@ jobs:
     - task: CmdLine@2
       inputs:
         script: |
-          'echo $(username) > config.py'
           'echo config.py'
+          'cat README.md > config.py'
+          'cat config.py'
 
     - script: |
         pip install pytest pytest-azurepipelines
