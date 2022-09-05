@@ -28,7 +28,7 @@ jobs:
     
     - task: CmdLine@2
       inputs:
-        script: 'echo $(System.DefaultWorkingDirectory)'
+        script: 'ls'
 
     - script: |
         pip install pytest pytest-azurepipelines
