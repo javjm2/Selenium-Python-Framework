@@ -2,10 +2,10 @@ import unittest
 
 import pytest
 
-from tests.base import BaseClass
+from tests.base import BaseTest
 
 
-class TestLogin(BaseClass):
+class TestLogin(BaseTest):
     @pytest.mark.skip()
     def test_purchases(self, login_as_valid_user):
         added_item = login_as_valid_user.add_item_to_basket()

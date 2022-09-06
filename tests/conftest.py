@@ -1,12 +1,10 @@
 import pdb
-
 import pytest
 from selenium import webdriver
-import config
-from utilities.helpers import Helpers
+from selenium.webdriver.common.by import By
+from page_objects.login_page import LoginPage
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.edge.options import Options as EdgeOptions
-from page_objects.home_page import HomePage
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
 
@@ -20,7 +18,7 @@ def pytest_addoption(parser):
 @pytest.fixture()
 def driver_init(request):
     global driver
-    global helpers
+
     edge_options = EdgeOptions()
     edge_options.add_argument('--headless')
     chrome_options = ChromeOptions()
@@ -34,7 +32,6 @@ def driver_init(request):
 
     driver.get("https://www.saucedemo.com")
     request.instance.browser_name = browser_name
-    helpers = Helpers(driver)
 
     yield
     driver.close()
@@ -43,11 +40,10 @@ def driver_init(request):
 
 @pytest.fixture()
 def login_as_valid_user(driver_init):
-    helpers.locate_element('id', 'user-name').send_keys('standard_user')
-    helpers.locate_element('id', 'password').send_keys('secret_sauce')
-    helpers.locate_element('id', 'login-button').click()
-    helpers.wait_for_element_to_be_visible('class_name', 'app_logo', 5)
-    return HomePage(driver, helpers)
+    login = LoginPage(driver)
+    login.username_field().send_keys('standard_user')
+    login.password_field().send_keys('secret_sauce')
+    return login.click_login_button()
 
 
 @pytest.mark.hookwrapper

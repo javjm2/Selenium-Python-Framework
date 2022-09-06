@@ -6,6 +6,6 @@ from utilities.helpers import Helpers
 
 
 @pytest.mark.usefixtures('driver_init')
-class BaseClass:
+class BaseTest:
     def wait_for(self, value, duration):
         WebDriverWait(self.driver, duration).until(lambda _: value)
