@@ -33,10 +33,8 @@ def driver_init(request):
         driver = webdriver.Edge(EdgeChromiumDriverManager().install(), options=edge_options)
 
     driver.get("https://www.saucedemo.com")
-    request.instance.driver = driver
     request.instance.browser_name = browser_name
     helpers = Helpers(driver)
-    request.instance.helpers = helpers
 
     yield
     driver.close()
