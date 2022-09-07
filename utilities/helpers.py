@@ -4,7 +4,7 @@ import os
 
 class Helpers:
     @staticmethod
-    def read_database_values(self, column, table):
+    def read_database_values(column, table):
         db = pyodbc.connect('Driver={SQL Server Native Client 11.0};'
                             f'Server={os.environ.get("SERVER_NAME")};'
                             f'Database={os.environ.get("DATABASE_NAME")};'

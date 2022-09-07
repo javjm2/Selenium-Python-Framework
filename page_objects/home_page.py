@@ -9,7 +9,7 @@ class HomePage(BaseClass):
         self.driver = driver
 
     def add_item_to_basket(self):
-        el = Helpers.read_database_values("name", "shopping_items")
+        el = Helpers.read_database_values("shopping_items")
         first_item = el[0]
         item = first_item.lower().split(' ')
         new_item = '-'.join(item)
@@ -47,7 +47,7 @@ class HomePage(BaseClass):
     @staticmethod
     def compare_item_name(item1, item2):
         alphabet = string.ascii_lowercase
-        for letter in alphabet:
+        for _ in alphabet:
             for j, k in zip(item1, item2):
                 if alphabet.index(j.lower()) != alphabet.index(k.lower()):
                     return True
