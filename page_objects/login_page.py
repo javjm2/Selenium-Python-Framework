@@ -1,4 +1,4 @@
-from page_objects.base import BaseClass
+from page_objects.base_page import BaseClass
 from page_objects.home_page import HomePage
 
 

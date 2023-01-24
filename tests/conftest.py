@@ -1,4 +1,3 @@
-import pdb
 import pytest
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -7,6 +6,9 @@ from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.edge.options import Options as EdgeOptions
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
+from utilities.sqlhelpers import SQLHelpers
+
+db = SQLHelpers()
 
 
 def pytest_addoption(parser):
@@ -24,18 +26,26 @@ def driver_init(request):
     chrome_options = ChromeOptions()
     chrome_options.add_argument('--headless')
     browser_name = request.config.getoption('--browser_name')
-
+    chrome_options.add_experimental_option("prefs", {
+        "download.default_directory": r"C:\Users\javjm\Downloads\New folder"
+    })
     if browser_name == 'chrome':
         driver = webdriver.Chrome(ChromeDriverManager().install(), options=chrome_options)
     elif browser_name == 'edge':
         driver = webdriver.Edge(EdgeChromiumDriverManager().install(), options=edge_options)
 
     driver.get("https://www.saucedemo.com")
+    request.instance.driver = driver
     request.instance.browser_name = browser_name
 
     yield
     driver.close()
     driver.quit()
+
+
+@pytest.fixture(params=db.get_all_shopping_items())
+def list_of_all_products(request):
+    return request.param
 
 
 @pytest.fixture()

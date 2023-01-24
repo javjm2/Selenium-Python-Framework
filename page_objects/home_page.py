@@ -1,24 +1,22 @@
 import string
 from page_objects.basket_page import BasketPage
-from utilities.helpers import Helpers
-from page_objects.base import BaseClass
+from utilities.sqlhelpers import SQLHelpers
+from page_objects.base_page import BaseClass
 
 
 class HomePage(BaseClass):
     def __init__(self, driver):
         self.driver = driver
 
-    def add_item_to_basket(self):
-        el = Helpers.read_database_values("shopping_items")
-        first_item = el[0]
-        item = first_item.lower().split(' ')
+    def add_item_to_basket(self, item):
+        item = item.lower().split(' ')
         new_item = '-'.join(item)
         self.locate_element('id', f'add-to-cart-{new_item}').click()
-        return first_item
+        return new_item
 
     def open_basket(self):
         self.locate_element('id', 'shopping_cart_container').click()
-        basket_page = BasketPage(self.driver, self.helpers)
+        basket_page = BasketPage(self.driver)
         return basket_page
 
     def sort_items_by_price(self, sort_type):
