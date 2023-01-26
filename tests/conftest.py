@@ -6,7 +6,7 @@ from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.edge.options import Options as EdgeOptions
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
-from utilities.sqlhelpers import SQLHelpers
+from utilities.sql_helpers import SQLHelpers
 
 db = SQLHelpers()
 

@@ -1,6 +1,6 @@
 import string
 from page_objects.basket_page import BasketPage
-from utilities.sqlhelpers import SQLHelpers
+from utilities.sql_helpers import SQLHelpers
 from page_objects.base_page import BaseClass
 
 

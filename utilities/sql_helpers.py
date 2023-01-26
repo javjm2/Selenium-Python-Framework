@@ -7,7 +7,7 @@ class SQLHelpers:
     @contextmanager
     def connect_to_database(self):
         db_connection = pyodbc.connect('Driver={SQL Server Native Client 11.0};'
-                            f'Server=Test-Server;'
+                            f'Server=Test;'
                             f'Database=Random;'
                             f'Trusted_Connection=yes;')
         try:
@@ -28,6 +28,6 @@ class SQLHelpers:
         with self.cursor() as cursor:
             cursor.execute(f'SELECT name FROM shopping_items')
             values = cursor.fetchall()
-            values = [j for i in values for j in i]
+            values = (j for i in values for j in i)
             return values
 
