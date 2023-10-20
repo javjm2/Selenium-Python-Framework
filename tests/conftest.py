@@ -80,4 +80,4 @@ def pytest_runtest_makereport(item):
 
 
 def _capture_screenshot(name):
-    pass
+    driver.save_screenshot(name)
